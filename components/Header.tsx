@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, Globe, ChevronDown } from 'lucide-react';
 import { NAV_LINKS, COMPANY_NAME } from '../constants';
-
-const LANGUAGES = [
-  { code: 'EN', label: 'English' },
-  { code: 'CN', label: '中文' },
-  { code: 'ES', label: 'Español' },
-  { code: 'FR', label: 'Français' },
-  { code: 'DE', label: 'Deutsch' },
-  { code: 'JP', label: '日本語' },
-];
+import { useLanguage, LANGUAGES } from '../LanguageContext';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState(LANGUAGES[0]);
+  const { language, setLanguage, t } = useLanguage();
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -24,6 +16,24 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Map nav links to translations
+  const translatedNavLinks = NAV_LINKS.map((link, index) => {
+    const keys = Object.keys(t.nav) as Array<keyof typeof t.nav>;
+    // Simple mapping based on index order or known keys. 
+    // Since NAV_LINKS is static: Work, Expertise, Insights, Careers, Contact
+    // We map them to t.nav.work, t.nav.expertise, etc.
+    let label = link.name;
+    if (index === 0) label = t.nav.work;
+    if (index === 1) label = t.nav.expertise;
+    if (index === 2) label = t.nav.insights;
+    if (index === 3) label = t.nav.careers;
+    if (index === 4) label = t.nav.contact;
+    
+    return { ...link, label };
+  });
+
+  const currentLangObj = LANGUAGES.find(l => l.code === language) || LANGUAGES[0];
 
   return (
     <header 
@@ -43,13 +53,13 @@ const Header: React.FC = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
+          {translatedNavLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href}
               className="text-sm font-semibold uppercase tracking-wider text-gray-300 hover:text-brand-yellow transition-colors relative group"
             >
-              {link.name}
+              {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-yellow transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
@@ -62,7 +72,7 @@ const Header: React.FC = () => {
                 onBlur={() => setTimeout(() => setIsLangMenuOpen(false), 200)}
             >
                 <Globe size={18} />
-                <span>{currentLang.code}</span>
+                <span>{currentLangObj.code}</span>
                 <ChevronDown size={14} className={`transition-transform duration-300 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
             </button>
 
@@ -71,9 +81,9 @@ const Header: React.FC = () => {
                     {LANGUAGES.map((lang) => (
                         <button
                             key={lang.code}
-                            className={`w-full text-left px-4 py-3 text-sm transition-colors flex items-center justify-between ${currentLang.code === lang.code ? 'text-brand-yellow bg-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                            className={`w-full text-left px-4 py-3 text-sm transition-colors flex items-center justify-between ${language === lang.code ? 'text-brand-yellow bg-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
                             onClick={() => {
-                                setCurrentLang(lang);
+                                setLanguage(lang.code);
                                 setIsLangMenuOpen(false);
                             }}
                         >
@@ -85,7 +95,7 @@ const Header: React.FC = () => {
           </div>
 
           <a href="#contact" className="px-6 py-2 border border-white/20 text-white font-bold uppercase text-xs tracking-widest hover:bg-brand-yellow hover:text-black hover:border-brand-yellow transition-all duration-300">
-            Let's Talk
+            {t.nav.letsTalk}
           </a>
         </nav>
 
@@ -100,14 +110,14 @@ const Header: React.FC = () => {
         {/* Mobile Menu Overlay */}
         <div className={`fixed inset-0 bg-black z-40 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex flex-col gap-8 text-center">
-            {NAV_LINKS.map((link) => (
+            {translatedNavLinks.map((link) => (
               <a 
                 key={link.name} 
                 href={link.href}
                 className="text-4xl font-display font-bold text-white hover:text-brand-yellow transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {link.name}
+                {link.label}
               </a>
             ))}
 
@@ -116,8 +126,8 @@ const Header: React.FC = () => {
                 {LANGUAGES.map(lang => (
                     <button 
                         key={lang.code}
-                        className={`text-sm font-bold uppercase tracking-widest px-3 py-2 border ${currentLang.code === lang.code ? 'border-brand-yellow text-brand-yellow' : 'border-transparent text-gray-500'}`}
-                        onClick={() => setCurrentLang(lang)}
+                        className={`text-sm font-bold uppercase tracking-widest px-3 py-2 border ${language === lang.code ? 'border-brand-yellow text-brand-yellow' : 'border-transparent text-gray-500'}`}
+                        onClick={() => setLanguage(lang.code)}
                     >
                         {lang.code}
                     </button>
@@ -129,7 +139,7 @@ const Header: React.FC = () => {
               className="mt-8 text-brand-yellow text-xl uppercase font-bold tracking-widest flex items-center justify-center gap-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Start a Project <ArrowUpRight />
+              {t.nav.startProject} <ArrowUpRight />
             </a>
           </div>
         </div>

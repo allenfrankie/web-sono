@@ -8,8 +8,9 @@ import Insights from './components/Insights';
 import Careers from './components/Careers';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { LanguageProvider } from './LanguageContext';
 
-function App() {
+function AppContent() {
   return (
     <div className="min-h-screen bg-brand-black text-white font-sans selection:bg-brand-yellow selection:text-black">
       <Header />
@@ -24,6 +25,14 @@ function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }
 

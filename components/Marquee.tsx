@@ -1,7 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../LanguageContext';
 
 const Marquee: React.FC = () => {
-  const words = ["CREATIVE", "PRODUCTION", "STRATEGY", "TECHNOLOGY", "SOURCING", "MEDIA", "GLOBAL", "LOCAL"];
+  const { t } = useLanguage();
+  const words = t.marquee;
   
   return (
     <div className="bg-brand-yellow py-6 overflow-hidden flex border-y border-black">

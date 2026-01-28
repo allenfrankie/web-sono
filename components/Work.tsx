@@ -1,15 +1,17 @@
 import React from 'react';
 import { FEATURED_WORK } from '../constants';
 import Button from './Button';
+import { useLanguage } from '../LanguageContext';
 
 const Work: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section id="work" className="py-24 bg-white text-black">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-          <h2 className="text-brand-black font-display font-bold text-5xl md:text-6xl mb-6">Recent Work</h2>
+          <h2 className="text-brand-black font-display font-bold text-5xl md:text-6xl mb-6">{t.work.title}</h2>
           <p className="max-w-2xl mx-auto text-gray-600 text-lg">
-            We partner with the world's leading brands to deliver work that matters.
+            {t.work.description}
           </p>
         </div>
 
@@ -36,7 +38,7 @@ const Work: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <Button variant="secondary" className="border-2 border-black">View All Projects</Button>
+          <Button variant="secondary" className="border-2 border-black">{t.work.viewAll}</Button>
         </div>
       </div>
     </section>

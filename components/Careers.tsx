@@ -1,21 +1,23 @@
 import React from 'react';
 import { JOB_OPENINGS } from '../constants';
 import Button from './Button';
+import { useLanguage } from '../LanguageContext';
 
 const Careers: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section id="careers" className="py-24 bg-brand-gray text-white">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Intro */}
           <div className="lg:col-span-4">
-            <h3 className="text-brand-yellow font-bold tracking-widest uppercase mb-4">Join the Noise</h3>
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Build the Future with Us</h2>
+            <h3 className="text-brand-yellow font-bold tracking-widest uppercase mb-4">{t.careers.eyebrow}</h3>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">{t.careers.title}</h2>
             <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              We are a team of amplifiers, creators, and tech-heads. We don't just follow trends; we set the volume. If you're ready to make an impact, we want to hear from you.
+              {t.careers.description}
             </p>
             <Button variant="outline" className="border-white/30 text-white hover:border-brand-yellow hover:text-brand-yellow">
-              View Culture
+              {t.careers.viewCulture}
             </Button>
           </div>
 
@@ -39,7 +41,7 @@ const Careers: React.FC = () => {
                   </div>
                   <div className="flex items-center">
                     <span className="text-sm font-bold uppercase tracking-widest mr-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-brand-yellow hidden md:block">
-                        Apply Now
+                        {t.careers.apply}
                     </span>
                     <button className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-brand-yellow group-hover:text-black group-hover:border-brand-yellow transition-all">
                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +54,7 @@ const Careers: React.FC = () => {
             </div>
             <div className="mt-8 text-center md:text-right">
                 <a href="#" className="text-gray-400 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors">
-                    See Archived Roles
+                    {t.careers.archived}
                 </a>
             </div>
           </div>
