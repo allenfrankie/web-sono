@@ -21,14 +21,13 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo Image */}
         <a href="#" className="flex items-center gap-2 group z-50">
-          <div className="w-10 h-10 bg-brand-yellow rounded-none flex items-center justify-center">
-            <span className="text-black font-black text-xl">S</span>
-          </div>
-          <span className={`text-2xl font-display font-bold tracking-tighter uppercase ${isMobileMenuOpen ? 'text-white' : 'text-white'}`}>
-            {COMPANY_NAME}
-          </span>
+          <img 
+            src="https://placehold.co/180x50/000000/DFFF00/png?text=SONO-AMP" 
+            alt={COMPANY_NAME} 
+            className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+          />
         </a>
 
         {/* Desktop Nav */}
