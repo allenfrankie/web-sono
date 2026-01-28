@@ -79,3 +79,61 @@ export const FEATURED_WORK = [
     size: "large"
   }
 ];
+
+export const INSIGHTS_POSTS = [
+  {
+    id: 1,
+    title: "The Future of AI in Creative Production",
+    category: "Technology",
+    date: "Oct 12, 2023",
+    image: "https://picsum.photos/600/400?random=20",
+    excerpt: "How generative models are reshaping the workflow of global design agencies without losing the human touch."
+  },
+  {
+    id: 2,
+    title: "Sustainable Branding: More Than Just Green",
+    category: "Strategy",
+    date: "Sep 28, 2023",
+    image: "https://picsum.photos/600/400?random=21",
+    excerpt: "Why modern consumers demand authenticity in eco-conscious messaging and how to deliver it."
+  },
+  {
+    id: 3,
+    title: "Navigating the Metaverse Marketing Crash",
+    category: "Digital",
+    date: "Sep 15, 2023",
+    image: "https://picsum.photos/600/400?random=22",
+    excerpt: "What went wrong, what survived, and where the real opportunities for immersive brand experiences lie today."
+  }
+];
+
+export const JOB_OPENINGS = [
+  {
+    id: 1,
+    role: "Senior Art Director",
+    location: "New York / Hybrid",
+    type: "Full-time",
+    department: "Creative"
+  },
+  {
+    id: 2,
+    role: "Full Stack Developer",
+    location: "Remote",
+    type: "Full-time",
+    department: "Technology"
+  },
+  {
+    id: 3,
+    role: "Account Executive",
+    location: "London",
+    type: "Full-time",
+    department: "Client Services"
+  },
+  {
+    id: 4,
+    role: "Motion Graphics Designer",
+    location: "Los Angeles",
+    type: "Contract",
+    department: "Production"
+  }
+];

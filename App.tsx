@@ -4,6 +4,8 @@ import Hero from './components/Hero';
 import Marquee from './components/Marquee';
 import Services from './components/Services';
 import Work from './components/Work';
+import Insights from './components/Insights';
+import Careers from './components/Careers';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -16,6 +18,8 @@ function App() {
         <Marquee />
         <Services />
         <Work />
+        <Insights />
+        <Careers />
         <Contact />
       </main>
       <Footer />
